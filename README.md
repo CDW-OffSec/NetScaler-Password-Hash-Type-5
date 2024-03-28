@@ -1,6 +1,6 @@
 # NetScaler Password Hash Research
-Ian Odette      (ian.odette@cdw.com)<br>
-Tyler Booth     (tyler.booth@cdw.com)
+Ian Odette      (ian.odette@cdw.com/[@stumblebot](https://github.com/stumblebot))<br>
+Tyler Booth     (tyler.booth@cdw.com/[@dru1d-foofus](https://github.com/dru1d-foofus))
 
 ## Background
 During a red team engagement, we recovered a lot of Citrix NetScaler configuration files from a SharePoint website. Some values we were able to extract using pre-exisiting methods; however, there appeared to be a newer hash type being used for the local system users. We set out to determine what that is and are using this to document our process.
