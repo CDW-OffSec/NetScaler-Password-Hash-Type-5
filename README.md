@@ -235,7 +235,7 @@ Salt                     : 2c334c4a4c2e593b6c3942622e5fcbd13c7bc895f24b9403f51ff
 Hash                     : 1f99045cc6d393c17be5ce3c6c8efea8b0de19726ff081fd1b8cf0cc3515a7a7
 ```
 
-We can actually crack this with the built-in hashcat PBKDF2-HMAC-SHA256 module by formatting the hash in a specific way:
+We can actually crack this with the [hashcat PBKDF2-HMAC-SHA256](https://github.com/hashcat/hashcat/blob/master/src/modules/module_10900.c) module by formatting the hash in a specific way:
 
 `sha256:ITERATIONS:<SALT>:<HASH>`
 1. We strip of the version identifer character from the beginning of the hash (`5`).
@@ -245,6 +245,8 @@ We can actually crack this with the built-in hashcat PBKDF2-HMAC-SHA256 module b
 
 The completed hash value will be:
 `sha256:2500:LDNMSkwuWTtsOUJiLl/L0Tx7yJXyS5QD9R/xjcAFBdg=:H5kEXMbTk8F75c48bI7+qLDeGXJv8IH9G4zwzDUVp6c=`
+
+This can now be cracked with `hashcat -m 10900`. A new module specifically for this hash type is currently in development.
 
 ## Sources
 1. https://github.com/hashcat/hashcat/blob/fafb277e0736a45775fbcadc1ca5caf0db07a308/src/modules/module_08100.c
