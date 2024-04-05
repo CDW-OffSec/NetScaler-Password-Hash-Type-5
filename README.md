@@ -246,7 +246,7 @@ We can actually crack this with the [hashcat PBKDF2-HMAC-SHA256](https://github.
 The completed hash value will be:
 `sha256:2500:LDNMSkwuWTtsOUJiLl/L0Tx7yJXyS5QD9R/xjcAFBdg=:H5kEXMbTk8F75c48bI7+qLDeGXJv8IH9G4zwzDUVp6c=`
 
-This can now be cracked with `hashcat -m 10900`. A new module specifically for this hash type is currently in development.
+This can now be cracked with `hashcat -m 10900`. ~~A new module specifically for this hash type is currently in development.~~ The PR to hashcat is here: https://github.com/hashcat/hashcat/pull/3984
 
 ## Sources
 1. https://github.com/hashcat/hashcat/blob/fafb277e0736a45775fbcadc1ca5caf0db07a308/src/modules/module_08100.c
