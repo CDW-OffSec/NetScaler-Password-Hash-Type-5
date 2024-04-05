@@ -248,6 +248,78 @@ The completed hash value will be:
 
 This can now be cracked with `hashcat -m 10900`. ~~A new module specifically for this hash type is currently in development.~~ The PR to hashcat is here: https://github.com/hashcat/hashcat/pull/3984
 
+New hash-mode benchmark:
+```
+./hashcat -m 33700 -b 
+hashcat (v6.2.6) starting in benchmark mode
+
+***SNIP***
+CUDA API (CUDA 12.2)
+====================
+* Device #1: NVIDIA GeForce GTX 1080 Ti, 11025/11164 MB, 28MCU
+
+***SNIP***
+Benchmark relevant options:===========================
+* --backend-devices-virtual=1
+* --optimized-kernel-enable
+
+----------------------------------------------------------------------------
+* Hash-Mode 33700 (Citrix NetScaler (PBKDF2-HMAC-SHA256)) [Iterations: 2499]
+----------------------------------------------------------------------------
+
+Speed.#1.........:   694.7 kH/s (63.70ms) @ Accel:16 Loops:256 Thr:1024 Vec:1
+
+Started: Fri Apr  5 03:53:41 2024
+Stopped: Fri Apr  5 03:53:55 2024
+```
+New hash-mode running:
+```
+./hashcat -m 33700 -a0 netscaler.hash hashcat.dic 
+hashcat (v6.2.6) starting
+
+***SNIP***
+Minimum password length supported by kernel: 0Maximum password length supported by kernel: 256
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+***SNIP***
+Dictionary cache hit:
+* Filename..: hashcat.dic
+* Passwords.: 1
+* Bytes.....: 8
+* Keyspace..: 1
+
+***SNIP***
+5567243c55099b6b10a714a350db53beea8be6ac9c247fd40fea7e96d206a9f11fd1c45735556ac2004138640de206d0e1522607ab3c3f92816156d2d7845068e:hashcat
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 33700 (Citrix NetScaler (PBKDF2-HMAC-SHA256))
+Hash.Target......: 5567243c55099b6b10a714a350db53beea8be6ac9c247fd40fe...45068e
+Time.Started.....: Fri Apr  5 04:00:00 2024 (0 secs)
+Time.Estimated...: Fri Apr  5 04:00:00 2024 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (hashcat.dic)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:       44 H/s (0.54ms) @ Accel:256 Loops:64 Thr:32 Vec:1
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 1/1 (100.00%)
+Rejected.........: 0/1 (0.00%)
+Restore.Point....: 0/1 (0.00%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:2496-2499
+Candidate.Engine.: Device Generator
+Candidates.#1....: hashcat -> hashcat
+Hardware.Mon.#1..: Temp: 44c Fan: 24% Util: 98% Core:1480MHz Mem:5005MHz Bus:16
+
+Started: Fri Apr  5 03:59:58 2024
+Stopped: Fri Apr  5 04:00:01 2024
+
+```
+## Thanks
+Thanks to [@cstalhood](https://github.com/cstalhood) for providing NetScaler OVAs and fielding our questions about the product. Thanks to sw0rdf1sh2 for helping to work through some issues during hashcat module development. 
+
 ## Sources
 1. https://github.com/hashcat/hashcat/blob/fafb277e0736a45775fbcadc1ca5caf0db07a308/src/modules/module_08100.c
 2. https://github.com/hashcat/hashcat/blob/fafb277e0736a45775fbcadc1ca5caf0db07a308/src/modules/module_22200.c
